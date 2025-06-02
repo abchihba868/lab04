@@ -1,7 +1,7 @@
 name: GitHub Actions 
 on: [push]
 jobs:
-  build:
+  build1:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -13,3 +13,20 @@ jobs:
                
         - name: Configure and Build Project
           uses: threeal/cmake-action@v1.3.0
+  build2:
+        runs-on: windows-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+            
+          - name: Set up MSBuild
+            uses: microsoft/setup-msbuild@v1.0.2
+            
+          - run: |
+              mkdir _build
+              cd _build
+              cmake ..
+              cmake --build .
+              
+          - name: Configure and Build Project
+            uses: threeal/cmake-action@v1.3.0
